@@ -19,29 +19,29 @@ const readingsModel = require("./readingsModel");
 // creation of Router
 const readingsRouter = express.Router();
 
-readingsRouter.post("/", async (req, res, next) => {
-  const {
-        TimeStamp,
-        firstName,
-        lastName,
-        email,
-        RFID,
-        Temperature,
-      } = req.body;
-  try {
-      await readingsModel.create({
-        TimeStamp,
-        firstName,
-        lastName,
-        email,
-        RFID,
-        Temperature,
-      });
-      res.send({ success: true });
-    } catch (error) {
-      next(error); // that error is handeled by app.use(err,req,res,next) in the serve page
-    }
-});
+// readingsRouter.post("/", async (req, res, next) => {
+//   const {
+//         TimeStamp,
+//         firstName,
+//         lastName,
+//         email,
+//         RFID,
+//         Temperature,
+//       } = req.body;
+//   try {
+//       await readingsModel.create({
+//         TimeStamp,
+//         firstName,
+//         lastName,
+//         email,
+//         RFID,
+//         Temperature,
+//       });
+//       res.send({ success: true });
+//     } catch (error) {
+//       next(error); // that error is handeled by app.use(err,req,res,next) in the serve page
+//     }
+// });
 
 
 readingsRouter.get("/", async (req, res, next) => {
@@ -51,6 +51,42 @@ readingsRouter.get("/", async (req, res, next) => {
     next(error);
   }
 });
+
+
+
+readingsRouter.get("/today", async (req, res, next) => {
+  const date = new Date();
+  const y = date.getFullYear();
+  const m = date.getMonth();
+  const d =  date.getDate()+"/" +m +"/"+y;
+  console.log(d);
+  try {
+    const data = await readingsModel.find({TimeStamp: d});
+    res.send(data);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
+
+readingsRouter.get("/:rfid", async (req, res, next) => {
+  const {rfid} = req.params;
+  console.log(rfid);
+  const date = new Date();
+  const y = date.getFullYear();
+  const m = date.getMonth();
+  const d = "/" +m +"/"+y;
+  try {
+    const data = await readingsModel.find({RFID: rfid, TimeStamp: { $regex: d }});
+    res.send(data);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
+
 
 
 
