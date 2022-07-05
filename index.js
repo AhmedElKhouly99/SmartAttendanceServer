@@ -7,7 +7,7 @@ const morgan = require('morgan');
 // const favicon = require('serve-favicon');
 const readingsRouter = require('./routers/readings/readingsRouter');
 const readingsModel = require("./routers/readings/readingsModel");
-// const adminRouter = require('./routers/admins/adminRouter');
+const adminRouter = require('./routers/admins/adminRouter');
 require('dotenv').config();
 var cors = require('cors');
 app.use(cors())
@@ -23,6 +23,7 @@ app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:500
 
 app.use(morgan('combined'));
 app.use(['reading', 'readings'], readingsRouter);
+app.use(['/admins','/admin'], adminRouter);
 
 app.get('/', async (req, res) => {
     res.send('hello');
@@ -70,7 +71,7 @@ client.on('message', async (topic, payload) => {
 
 
 
-app.use(['/reading', '/readings'], readingsRouter);
+// app.use(['/reading', '/readings'], readingsRouter);
 // app.use(['/admins','/admin'], adminRouter);
 
 // app.use(favicon(path.join(__dirname, 'staticFiles', 'images', 'favicon.ico')));

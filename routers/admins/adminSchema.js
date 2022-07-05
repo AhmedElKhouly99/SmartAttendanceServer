@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const adminSchema = new mongoose.Schema({
-    email: 'string',
-    password: 'string'
+    Email: 'string',
+    Password: 'string'
 });
 
 module.exports = adminSchema;
