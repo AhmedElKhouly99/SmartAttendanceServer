@@ -22,7 +22,7 @@ app.use(bodyParser.json({limit: "50mb"}));
 app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
 
 app.use(morgan('combined'));
-app.use(['reading', 'readings'], readingsRouter);
+// app.use(['reading', 'readings'], readingsRouter);
 app.use(['/admins','/admin'], adminRouter);
 
 app.get('/', async (req, res) => {
@@ -71,7 +71,7 @@ client.on('message', async (topic, payload) => {
 
 
 
-// app.use(['/reading', '/readings'], readingsRouter);
+app.use(['/reading', '/readings'], readingsRouter);
 // app.use(['/admins','/admin'], adminRouter);
 
 // app.use(favicon(path.join(__dirname, 'staticFiles', 'images', 'favicon.ico')));
