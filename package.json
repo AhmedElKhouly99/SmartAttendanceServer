@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "forever start --minUptime 1 --spinSleepTime 1000 -w index.js",
+    "start": "npm i forever & forever start --minUptime 1 --spinSleepTime 1000 -w index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
