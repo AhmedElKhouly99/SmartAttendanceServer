@@ -39,6 +39,7 @@ adminRouter.post('/', async (req, res, next) => {
 adminRouter.post('/login', async (req, res, next)=> {
     const {Email, Password} = req.body;
     try {
+        console.log(req.body);
         const user = await AdminModel.findOne({Email, Password});
         if(user.Email === Email && user.Password === Password)
             res.send({login:true});
