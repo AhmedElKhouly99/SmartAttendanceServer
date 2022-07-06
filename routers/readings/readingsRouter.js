@@ -58,7 +58,7 @@ readingsRouter.get("/today", async (req, res, next) => {
   const date = new Date();
   const y = date.getFullYear();
   const m = date.getMonth();
-  const d =  date.getDate()+"/" +m +"/"+y;
+  const d =  date.getDate()+"/" +(m+1) +"/"+y;
   console.log(d);
   try {
     const data = await readingsModel.find({TimeStamp: d});
