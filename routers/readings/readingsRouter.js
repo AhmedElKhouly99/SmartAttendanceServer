@@ -76,7 +76,7 @@ readingsRouter.get("/:rfid", async (req, res, next) => {
   const date = new Date();
   const y = date.getFullYear();
   const m = date.getMonth();
-  const d = "/" +m +"/"+y;
+  const d = "/" +(m+1) +"/"+y;
   try {
     const data = await readingsModel.find({RFID: rfid, TimeStamp: { $regex: d }});
     res.send(data);
